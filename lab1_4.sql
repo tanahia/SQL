@@ -1,0 +1,2 @@
+SELECT region
+FROM cities;
