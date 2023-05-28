@@ -1,0 +1,66 @@
+SELECT list_stations.id, list_stations.name_station,
+ list_stations.branch_id,
+ transition.station_to_id
+FROM list_stations
+INNER JOIN transition ON list_stations.id = transition.station_from_id;
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+DROP TABLE IF EXISTS `list_branches`;
+CREATE TABLE `list_branches` (
+  `branch_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_branch` char(255) NOT NULL,
+  `color` char(255) NOT NULL,
+  PRIMARY KEY (`branch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `list_stations`;
+CREATE TABLE `list_stations` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name_station` text NOT NULL,
+  `branch_id` int(11) NOT NULL,
+  `next_id` int(11) NOT NULL,
+  `previous_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `list_stations` (`id`, `name_station`, `branch_id`, `next_id`, `previous_id`) VALUES
+(1,	'Peremoga',	11,	2,	0),
+(2,	'Oleksiivska',	1,	3,	1),
+(3,	'23 Serpnya',	1,	4,	2),
+(4,	'Botanichnuj sad',	1,	5,	3),
+(5,	'Naykova',	1,	6,	4),
+(6,	'Derzhprom',	1,	7,	5),
+(7,	'Arhitectora Beketova',	1,	8,	6),
+(8,	'Zahusnukiv Ukrainu',	1,	9,	7),
+(9,	'Metrobydivnikiv',	1,	10,	8),
+(10,	'Holodna gora',	2,	11,	9),
+(11,	'Pivdenuj vokzal',	2,	12,	10),
+(12,	'Zentralnuj runok',	2,	13,	11),
+(13,	'Majdan Konstutyzii',	2,	14,	12),
+(14,	'Prospekt Gagarina',	2,	15,	13),
+(15,	'Sportivna',	2,	16,	14),
+(16,	'Zavod im. Maluscheva',	2,	17,	15),
+(17,	'Turboatom',	2,	18,	16),
+(18,	'Palaz sporty',	2,	19,	17),
+(19,	'Armijska',	2,	20,	18),
+(20,	'Im. O. S. Maselskogo',	2,	21,	19),
+(21,	'Traktornuj zavod',	2,	22,	20),
+(22,	'Indystrialna',	2,	23,	21),
+(23,	'Istoruchnuj musej',	3,	24,	22),
+(24,	'Yniversitet',	3,	25,	23),
+(25,	'Puschkinska',	3,	26,	24),
+(26,	'Kuivska',	3,	27,	25),
+(27,	'Akademika Barabaschova',	3,	28,	26),
+(28,	'Akademika Pavlova',	3,	29,	27),
+(29,	'Studentska',	3,	30,	28),
+(30,	'Geroiv prazi',	3,	0,	29);
+
+DROP TABLE IF EXISTS `transition`;
+CREATE TABLE `transition` (
+  `station_from_id` int(11) NOT NULL,
+  `station_to_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
