@@ -1,0 +1,3 @@
+SELECT region, SUM(population) AS population FROM cities
+GROUP BY region
+HAVING COUNT(*) >=10;

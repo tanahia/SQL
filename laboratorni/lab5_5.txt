@@ -1,0 +1,3 @@
+SELECT name, population FROM cities
+WHERE 150000 <population and population< 500000 AND region IN (SELECT uuid FROM regions 
+WHERE area_quantity<5);
