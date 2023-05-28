@@ -1,0 +1,52 @@
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+DROP TABLE IF EXISTS `news`;
+CREATE TABLE `news` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `cat_id` int(11) NOT NULL,
+  `title` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `publication_date` date NOT NULL,
+  `author` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `content` varchar(10000) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL, 
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `news` (`id`, `title`, `content`, `category_id`, `publication_date`) VALUES
+(1,	'Political_news',	'Everything about American policy',	1, '19-01-2023'),
+(2,	'About_nature',	'What you should know about global warming',	3, '29-05-2023'),
+(3,	'About_inventions',	'The newest inventions in this year',	2, '16-03-2023'),
+(4,	'About_fashion',	'New winter collection',	4, '12-01-2023'),
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1,	'News'),
+(2,	'Policy'),
+(3,	'Nature'),
+(4,	'Inventions'),
+(5,	'Fashion'),
+
+DROP TABLE IF EXISTS `ratings`;
+CREATE TABLE `ratings` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `mark` int(1) NOT NULL,
+  `comment` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ip` varchar(15) NOT NULL,
+  `news_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+INSERT INTO `ratings` (`id`, `mark`, `comment`, `ip`, `news_id`) VALUES
+(1,	5,	'Interesting',	'162.206.176.128',	1),
+(2,	1,	'Why I read this?',	'217.103.108.198',	2),
+(3,	3,	'I expected more',	'205.102.227.99',	3),
+(4,	2,	'How about spring collection?',	'106.147.112.136',	4),
+(5,	1,	'Where is the update?',	'213.115.117.204',	4);
